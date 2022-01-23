@@ -1,23 +1,37 @@
 import logo from './logo.svg';
 import './App.css';
+import Data from "./data.json"
+import NewsTab from "./components/NewsTab"
+import { useState } from 'react';
 
 function App() {
+  let singleData = Data[0]
+  let arrayData = []
+  const [count,setCount] = useState(0)
+
+  for(let i = count; i< count+6 ;i++){
+    arrayData.push(Data[i])
+  }
+  
+  
+  function handleClick(){
+  setCount(count+6)
+  }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Personal News</h1>
+      <div className='next'>
+        <div className='newBox'>
+          {arrayData.map(x=>(
+            <NewsTab data={x} />
+          ))}
+        </div>
+        <button onClick={handleClick}>next</button>
+      </div>
+       
+
     </div>
   );
 }
